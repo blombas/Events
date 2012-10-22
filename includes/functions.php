@@ -152,7 +152,7 @@ if(!function_exists('get_zero'))
 		{
 			$conn = new PDO('mysql:host=localhost;dbname=event_db', 'root', 'root');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$stmt = $conn->prepare('select id from events where email_state = 0');
+			$stmt = $conn->prepare('select user_id, datetime from events where email_state = 0');
 	  		$stmt->execute();
 	  		return $stmt->fetchAll();		
 		}
