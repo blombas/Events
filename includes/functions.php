@@ -9,9 +9,9 @@ if(!function_exists('insert_user'))
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('INSERT INTO users VALUES("", :name, :email, :phone)');
 	  		$stmt->execute(array(
-	    		':name' => htmlspecialchars($post['name']),
-				':email'=> htmlspecialchars($post['email']),
-	    		':phone' => htmlspecialchars($post['phone']) ));
+	    		':name' => $post['name'],
+				':email'=> $post['email'],
+	    		':phone' => $post['phone'] ));
 		}
 		catch(PDOException $e)
 		{
@@ -27,12 +27,14 @@ if(!function_exists('insert_event'))
 	{
 		try
 		{
+			$email_state = 0;
 			$conn = new PDO('mysql:host=localhost;dbname=event_db', 'root', 'root');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$stmt = $conn->prepare('INSERT INTO events VALUES("", :my_date, :user_id)');
+			$stmt = $conn->prepare('INSERT INTO events VALUES("", :my_date, :user_id, :state)');
 	  		$stmt->execute(array(
-	    		':my_date' => htmlspecialchars($date),
-				':user_id'=> htmlspecialchars($id) ));
+	    		':my_date' => $date,
+				':user_id'=> $id,
+				'state'=> $email_state ));
 	  		return true;
 		}
 		catch(PDOException $e)
@@ -139,6 +141,25 @@ if(!function_exists('get_hcard'))
 			</div>
 EOT;
 		return $hcard;
+	}
+}
+
+if(!function_exists('get_zero'))
+{	
+	function get_zero()
+	{
+		try
+		{
+			$conn = new PDO('mysql:host=localhost;dbname=event_db', 'root', 'root');
+		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$stmt = $conn->prepare('select id from events where email_state = 0');
+	  		$stmt->execute();
+	  		return $stmt->fetchAll();		
+		}
+		catch(PDOException $e)
+		{
+			echo 'Error: ' . $e->getMessage();
+		}
 	}
 }
 

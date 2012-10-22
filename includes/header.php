@@ -27,5 +27,6 @@
 			<a href="index.php">Home</a>
 		    <a href="signup.php">Sign up</a>
 		    <a href="events.php">Events</a>
+		    <a href="mail.php">Mail</a>
 
 		</div> <!-- end #nav -->

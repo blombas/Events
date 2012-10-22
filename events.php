@@ -93,7 +93,11 @@
 				}
 				$_SESSION['new_event'] = false;
 			?>
-
+			<?php
+			 $today = new Datetime('now');
+			 $today = $today->format('Y-m-d H:i:s');
+			 echo '<h3> current datetime is: ' . $today . "</h3>";
+			 ?>
 		</div> <!-- end #newEvent -->
 
 		
