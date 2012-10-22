@@ -1,0 +1,161 @@
+/* ----------------------------
+simple reset
+---------------------------- */
+
+html, body, ul, ol, li, form
+{
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, a { margin-top: 0; }
+
+img { border: 0; }
+
+
+li { list-style: none; }
+/*  ---------------------------------------------
+
+template colors 
+
+#98A89E	(bluegrey)
+#BAC0AC	(grey)
+#FAFAE3 white/yellow)
+#FF4411	(orange)
+#D40015	(red)
+#272E36 (darker grey)
+---------------------------------------------*/
+
+body 
+{
+	background-color:#BAC0AC	;
+	font-family: georgia,sans-serif;
+	color:#333;
+	margin:0;
+	padding:0;
+}
+
+h1, h2, h3, h4, h5, h6, p, a
+{
+			color: #272E36;
+}
+img
+{
+	 width: 400px;
+	 height: 400px;
+	 margin-top: 30px;
+}
+
+li, input
+{
+	margin-top: 10px;
+}
+#wrapper 
+{
+	width:960px;
+	background-color:#FAFAE3;
+	margin:0 auto;
+	border-left:1px solid #98A89E;
+	border-right:1px solid #98A89E;
+}
+ 
+#header 
+{
+	width:960px;
+	height:70px;
+	background-color:#98A89E;
+	margin:0 auto;
+	margin-bottom:25px;
+	border-bottom:3px solid #D40015;
+	border-top:1px solid #98A89E;
+}
+ 
+#header h2 
+{
+	color: #D40015;
+	padding:10px;
+}
+ 
+#nav 
+{
+	width:960px;
+	height:40px;
+	padding-left: 10px;
+}
+ 
+#nav a 
+{
+	display:inline;
+	padding:10px;
+	text-decoration:none;
+	color: #272E36;
+	font-weight: bolder;
+	background-color:#BAC0AC;
+}
+ 
+#nav a:hover 
+{
+	background-color:#98A89E;
+	height:80px;
+}
+ 
+#content
+ {
+	width:940px;
+	min-height: 600px;
+	padding:10px;
+}
+
+#info_message
+{
+	margin-top: 30px;
+	color: red ;
+}
+
+#events
+{
+	float: left;
+}
+
+#events h3
+{
+	margin-top: 30px;
+	color: #272E36 ;
+}
+
+#events h4
+{
+	margin-top: 15px;
+	margin-bottom: 0px;
+	color: #FF4411;
+}
+ 
+#newEvent
+{
+	float: left;
+	margin-left: 250px;
+}
+
+#newEvent h3 
+{
+	margin-top: 30px;
+	color: #272E36 ;
+}
+
+.vcard
+{
+	color: #BAC0AC;	
+}
+#footer 
+{
+	clear:both;
+	width:960px;
+	height:70px;
+	background-color:#98A89E;
+	border-top:3px solid #D40015;
+}
+ 
+#footer p 
+{
+	padding:10px;
+}
