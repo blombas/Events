@@ -64,7 +64,7 @@ if(!function_exists('get_users'))
 	}
 }
 
-if(!function_exists('get_user'))
+if(!function_exists('get_user($id)'))
 {
 	function get_user($id)
 	{
@@ -152,9 +152,28 @@ if(!function_exists('get_zero'))
 		{
 			$conn = new PDO('mysql:host=localhost;dbname=event_db', 'root', 'root');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$stmt = $conn->prepare('select user_id, datetime from events where email_state = 0');
+			$stmt = $conn->prepare('select user_id, datetime, id from events where email_state = 0');
 	  		$stmt->execute();
 	  		return $stmt->fetchAll();		
+		}
+		catch(PDOException $e)
+		{
+			echo 'Error: ' . $e->getMessage();
+		}
+	}
+}
+
+if(!function_exists('set_state($id, $state)'))
+{	
+	function set_state($id, $state)
+	{
+		try
+		{
+			$conn = new PDO('mysql:host=localhost;dbname=event_db', 'root', 'root');
+		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$stmt = $conn->prepare('update events set email_state=? where id=?');
+	  		$stmt->execute(array($state, $id));
+	  		return true; 				
 		}
 		catch(PDOException $e)
 		{

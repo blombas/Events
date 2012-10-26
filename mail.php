@@ -4,24 +4,21 @@ require ('includes/functions.php'); ?>
 	<div id="content">
 
 		<?php
-		/*$start_date = new DateTime('2012-10-22 14:10:58');
-		$now_diff = $start_date->diff(new DateTime('now'));
-		echo $now_diff->days.' days total<br>';
-		echo $now_diff->y.' years<br>';
-		echo $now_diff->m.' months<br>';
-		echo $now_diff->d.' days<br>';
-		echo $now_diff->h.' hours<br>';
-		echo $now_diff->i.' minutes<br>';
-		echo $now_diff->s.' seconds<br>';*/
 
-			$result = get_zero();
+			$result = get_zero();	// get all events in state zero
 			foreach($result as $id => $value) 
 			{
 				$start_date = new DateTime($value[1]);
 				$now_diff = $start_date->diff(new DateTime('now'));
-				if($now_diff->i < 2)
+				if($now_diff->y == 0 && $now_diff->m == 0 && $now_diff->d == 0 && $now_diff->h == 0 && $now_diff->i < 2)
 				{
-					echo $now_diff->i;	
+					set_state($value[2], 1);
+					echo "Event (id = " . $value[2] . ") is set to state 1 <br>";
+					$user = get_user($value[0]);
+					send_mail($user[2], 1); // kommet her til, skal til at lave send_mail metoden
+					echo "mail has been sendt <br>";
+					set_state($value[2], 2);
+					echo "Event (id = " . $value[2] . ") is set to state 2 <br><br><br>";
 				}
 				
 			}			
