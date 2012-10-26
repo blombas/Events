@@ -182,4 +182,27 @@ if(!function_exists('set_state($id, $state)'))
 	}
 }
 
+if(!function_exists('send_mail($mail, $state)'))
+{	
+	function send_mail($mail, $state)
+	{
+		$recipient = $mail; 
+		$header  = "MIME-Version: 1.0" . "\r\n";
+		$header .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+		$header .= "from:givemeacall@mail.com";
+		$subject = "";
+		$myText = "";
+		switch($state)
+		{
+			case 1:
+				$subject = "Reminder"; 
+				$myText = "<h1 style='background-color: #006699'>This is a reminder mail</h1>
+						<p>There are less than 2 minuttes to your event occurs</p>";
+				break;
+
+		}
+		mail($recipient, $subject, $myText, $header); 
+	}
+}
+
 ?>

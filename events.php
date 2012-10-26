@@ -89,7 +89,7 @@
 			<?php  
 				if($_SESSION['new_event'])
 				{
-					echo "<h3> Thanks, your new event is registret";
+					echo "<h4> Thanks, your new event is registret </h4>";
 				}
 				$_SESSION['new_event'] = false;
 			?>

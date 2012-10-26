@@ -2,7 +2,6 @@
 require ('includes/functions.php'); ?>
 
 	<div id="content">
-
 		<?php
 
 			$result = get_zero();	// get all events in state zero
@@ -15,16 +14,12 @@ require ('includes/functions.php'); ?>
 					set_state($value[2], 1);
 					echo "Event (id = " . $value[2] . ") is set to state 1 <br>";
 					$user = get_user($value[0]);
-					send_mail($user[2], 1); // kommet her til, skal til at lave send_mail metoden
+					send_mail($user[2], 1);
 					echo "mail has been sendt <br>";
 					set_state($value[2], 2);
 					echo "Event (id = " . $value[2] . ") is set to state 2 <br><br><br>";
 				}
-				
 			}			
-			
-		
-
 		?>
 	</div> <!-- end #content -->
 
