@@ -1,4 +1,5 @@
-<?php 
+<?php
+	include ('includes/header.php');
 	require('includes/functions.php');
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -16,8 +17,6 @@
 	
 ?>
 
-<?php include ('includes/header.php') ?>
-<?php require ('includes/functions.php') ?>
 	<div id="content">
 		<div id="signup">
 
