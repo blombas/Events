@@ -6,57 +6,47 @@
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
+		$my_date = $_POST['date'];
+		if(!empty($my_date) && $_SESSION['username'] != "")
+		{
+			$userid = get_user_id($_SESSION['username']);
+			$date_inserted = insert_event($my_date, $userid);
+			$_SESSION['new_event'] = $date_inserted;
 		
-		$name = $_POST['name'];
-		$_SESSION['username'] = $name;
-		$userid = get_user_id($name);
-		$user_array = get_user($userid);
-		$hcard = get_hcard($user_array);
-		$user_event = get_user_event($userid);
+			$userid = get_user_id($_SESSION['username']);
+			$user_array = get_user($userid);
+			$hcard = get_hcard($user_array);
+			$user_event = get_user_event($userid);	
+		}
+		else
+		{
+			echo "Please login to see your events";
+		}
+		
+		
 	}
 	if($_SERVER['REQUEST_METHOD'] == 'GET')
 	{
-		$hcard = array();
-		if(!empty($_GET) && $_SESSION['username'] != 'Select a user')
+		if($_SESSION['username'] != "")
 		{
-			$my_date = $_GET['date'];
-			if(!empty($my_date))
-			{
-				$userid = get_user_id($_SESSION['username']);
-				$date_inserted = insert_event($my_date, $userid);
-				$_SESSION['new_event'] = $date_inserted;
-			}
+			$userid = get_user_id($_SESSION['username']);
+			$user_array = get_user($userid);
+			$hcard = get_hcard($user_array);
+			$user_event = get_user_event($userid);	
 		}
+		else
+		{
+			echo "Please login to see your events";
+		}	
 	}
 
  ?>
 	<div id="content">
 		<div id="events">
 			<h3>User events</h3>
-			<form action="" method="post">
-				<select name="name">
-					<option> Select a user</option>
-					<?php  
-					$users = get_users();
-					foreach($users as $array=>$names)
-					{
-						$value1 = "";
-						$value = "";
-						foreach($names as $name=>$value)
-						{
-							if($value != $value1)
-							{	
-								echo "<option value=\"$value\">$value</option>";
-							}
-							$value1 = $value;
-						}
-					}
-				  	?>
-				</select>
-				<input type="submit" value="Go">
-			</form><br><br>
+			
 			<?php 
-			if ($_SESSION['username'] != 'Select a user' && !empty($hcard))
+			if (!empty($_SESSION['username']) && !empty($hcard))
 			{
 				echo "<h3>List of events for:</h3>" . $hcard;
 			}		
@@ -81,7 +71,7 @@
 		<div id="newEvent">
 			
 			<h3>Make a new event</h3>
-			<form action="" method="get">
+			<form action="" method="post">
 				<label for="date">Datetime: </label>
 				<input name="date" id="date" type="datetime"><br><br>
 				<input type="submit" value="Create event">

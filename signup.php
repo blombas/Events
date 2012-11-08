@@ -17,10 +17,9 @@
 		{
 			$hash = hash('sha256', $_POST['password1'] . $_POST['phone']);
 			insert_user($_POST, $hash);
-			$welcome_text = ' Welcome, you have signed up :-)';
+			$welcome_text = ' Welcome, you have signed up, now go and login.';
 		}
 	}
-	
 ?>
 
 	<div id="content">
@@ -30,23 +29,23 @@
 				<ul>
 					<li>
 						<label for="name">Name : </label>
-						<input input="text" name="name" id="name">
+						<input input="text" name="name" id="name" autocomplete="off">
 					</li>
 					<li>
 						<label for="email">Email : </label>
-						<input input="text" name="email" id="email">
+						<input input="text" name="email" id="email" autocomplete="off">
 					</li>
 					<li>
 						<label for="phone">Phone: </label>
-						<input input="text" name="phone" id="phone">
+						<input input="text" name="phone" id="phone" autocomplete="off">
 					</li>
 					<li>
 						<label for="password1">Password: </label>
-						<input input="password" name="password1" id="password1">
+						<input type="password" name="password1" id="password1" autocomplete="off">
 					</li>
 					<li>
 						<label for="password2">Password again: </label>
-						<input input="password" name="password2" id="password2">
+						<input type="password" name="password2" id="password2" autocomplete="off">
 					</li>
 					<li>
 						<input type="submit" value="Sign up">

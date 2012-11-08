@@ -2,8 +2,15 @@
 	session_start();
 	include ('includes/header.php'); 
 	require ('includes/functions.php');
-
-	$login_text = "Please login";
+	if($_SESSION['loggedin'] = false && $_SESSION['username'] != "")
+	{
+		$login_text = "Please login";
+	}
+	else
+	{
+		$login_text = "You are logged in";
+	}
+	
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$username = $_POST['email'];
@@ -13,15 +20,20 @@
 		{
 			extract($user);
 			$hash = hash('sha256', $password1 . $phone);
-			if($hash == $password)
+			if($hash == $password && $email == $username)
 			{
 				$_SESSION['username'] = $name;
-				$login_text = "You are logged in";
+				$_SESSION['loggedin'] = true;
+				header('Location: index.php');
 			}
 			else
 			{
-				$login_text = "Username or password does not match our records";
+				$login_text = "Username or password do not match";
 			}
+		}
+		else
+		{
+			$login_text ="User does not exist";
 		}
 	}
 	?>
@@ -40,9 +52,9 @@
 		</h4>
 		<form action="" method="post">
 			<label for="email">Email:</label>
-			<input type="text" id="email" name="email" title="Email" value="email"><br><br>
+			<input type="text" id="email" name="email" title="Email" value="email" autocomplete="off"><br><br>
 			<label for="password">Password:</label>
-			<input type="password" id="password" name="password" title="Password" value=""><br>
+			<input type="password" id="password" name="password" title="Password" value="" autocomplete="off"><br>
 			<input type="submit" value="Login" />
 		</form>
 		</div>
