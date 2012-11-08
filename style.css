@@ -166,3 +166,27 @@ li, input
 {
 	padding:10px;
 }
+
+.home
+{
+	float:left;
+}
+
+.login
+{
+	background:#98A89E;
+	float:left;
+	padding: 20px;
+	margin-left: 70px;
+	margin-bottom: 10px;
+}
+
+#username
+{
+	float:right;
+	margin-top: 15px;
+	margin-right: 185px;
+	color:#D40015;
+	font-style:italic;
+	font-weight: 400;
+}

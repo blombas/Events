@@ -1,5 +1,4 @@
 <!DOCTYPE html >
-
 <html>
 <head>
 
@@ -17,9 +16,10 @@
     <div id="wrapper">
 
 		<div id="header">
-
+			<?php
+			echo "<p id=\"username\"> Welcome " . $_SESSION['username'] . "</p>"; 
+			?>
 			<h2>Give me a call</h2>
-
 		</div> <!-- end #header -->
 
 		<div id="nav">

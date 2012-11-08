@@ -1,17 +1,18 @@
 <?php 
 if(!function_exists('insert_user'))
 {	
-	function insert_user($post)
+	function insert_user($post, $hash)
 	{
 		try
 		{
 			$conn = new PDO('mysql:host=localhost;dbname=event_db', 'root', '');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$stmt = $conn->prepare('INSERT INTO users VALUES("", :name, :email, :phone)');
+			$stmt = $conn->prepare('INSERT INTO users VALUES("", :name, :email, :phone, :password)');
 	  		$stmt->execute(array(
 	    		':name' => $post['name'],
 				':email'=> $post['email'],
-	    		':phone' => $post['phone'] ));
+	    		':phone' => $post['phone'],
+	    		':password' => $hash ));
 		}
 		catch(PDOException $e)
 		{
@@ -74,6 +75,27 @@ if(!function_exists('get_user($id)'))
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('select * from users where id = :my_user');
 			$stmt->bindParam(':my_user', $id, PDO::PARAM_INT);
+			$stmt->execute();
+			$row = $stmt->fetch();
+			return $row;
+		}
+		catch(PDOException $e)
+		{
+			echo 'Error: ' . $e->getMessage();
+		}
+	}
+}
+
+if(!function_exists('get_user_from_mail($email)'))
+{
+	function get_user_from_mail($email)
+	{
+		try
+		{
+			$conn = new PDO('mysql:host=localhost;dbname=event_db', 'root', '');
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$stmt = $conn->prepare('select * from users where email = :my_user');
+			$stmt->bindParam(':my_user', $email, PDO::PARAM_STR);
 			$stmt->execute();
 			$row = $stmt->fetch();
 			return $row;
