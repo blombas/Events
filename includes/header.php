@@ -16,8 +16,11 @@
     <div id="wrapper">
 
 		<div id="header">
-			<?php
-			echo "<p id=\"username\"> Welcome " . $_SESSION['username'] . "</p>"; 
+			<?php 
+			if(isset($_SESSION['loggedin']))
+			{
+				echo "<p id=\"username\"> Welcome " . htmlspecialchars($_SESSION['username']) . "</p>"; 
+			}
 			?>
 			<h2>Give me a call</h2>
 		</div> <!-- end #header -->

@@ -155,6 +155,9 @@ if(!function_exists('get_hcard'))
 	function get_hcard($user_array)
 	{
 		extract($user_array);
+		$name = htmlspecialchars($name);
+		$email = htmlspecialchars($email);
+		$phone = htmlspecialchars($phone);
 		$hcard = <<<EOT
 			<div class="vcard">
 			<span class="fn"> $name </span><br>

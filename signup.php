@@ -3,6 +3,8 @@
 	include ('includes/header.php');
 	require('includes/functions.php');
 
+	//function checks if all fields are filled out,
+	// and hashing password with salt before saving to db.
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		if(in_array(null, $_POST))
@@ -15,8 +17,9 @@
 		}
 		else
 		{
-			$hash = hash('sha256', $_POST['password1'] . $_POST['phone']);
-			insert_user($_POST, $hash);
+			$hash = hash('sha256', $_POST['password1'] . $_POST['phone']);	// hashing pass with salt(salt is phonenumber)
+			insert_user($_POST, $hash);	
+			session_destroy();								//fuction that insert info into db
 			$welcome_text = ' Welcome, you have signed up, now go and login.';
 		}
 	}

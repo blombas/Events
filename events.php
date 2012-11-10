@@ -3,31 +3,36 @@
 	session_start(); 
  	include ('includes/header.php');
  	require ('includes/functions.php');
-
+ 	$_SESSION['event_created'] = false;
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$my_date = $_POST['date'];
-		if(!empty($my_date) && $_SESSION['username'] != "")
+		if(!empty($my_date) && isset($_SESSION['loggedin']))
 		{
 			$userid = get_user_id($_SESSION['username']);
 			$date_inserted = insert_event($my_date, $userid);
 			$_SESSION['new_event'] = $date_inserted;
+			$_SESSION['event_created'] = true;
 		
 			$userid = get_user_id($_SESSION['username']);
 			$user_array = get_user($userid);
 			$hcard = get_hcard($user_array);
 			$user_event = get_user_event($userid);	
 		}
+		else if(empty($my_date))
+		{
+			echo "<p style=\"color:red;\">You need to insert a date </p>";
+		}
 		else
 		{
-			echo "Please login to see your events";
+			echo "<p style=\"color:red;\">Please login to see your events </p>";
 		}
 		
 		
 	}
 	if($_SERVER['REQUEST_METHOD'] == 'GET')
 	{
-		if($_SESSION['username'] != "")
+		if(isset($_SESSION['loggedin']))
 		{
 			$userid = get_user_id($_SESSION['username']);
 			$user_array = get_user($userid);
@@ -36,7 +41,7 @@
 		}
 		else
 		{
-			echo "Please login to see your events";
+			echo "<p style=\"color:red;\">Please login to see or create events.</p>";
 		}	
 	}
 
@@ -60,7 +65,7 @@
 					{
 						if($value != $value1)
 						{	
-							echo "<h4>" . $value . "</h4>";
+							echo "<h4>" . htmlspecialchars($value) . "</h4>";
 						}
 						$value1 = $value;
 					}
@@ -77,11 +82,12 @@
 				<input type="submit" value="Create event">
 			</form><br><br>
 			<?php  
-				if($_SESSION['new_event'])
+				if($_SESSION['event_created'] == true)
 				{
 					echo "<h4> Thanks, your new event is registret </h4>";
 				}
 				$_SESSION['new_event'] = false;
+				$_SESSION['event_created'] = false;
 			?>
 			<?php
 			 $today = new Datetime('now');
