@@ -5,7 +5,7 @@ if(!function_exists('insert_user'))
 	{
 		try
 		{
-			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'felix');
+			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'blombas1');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('INSERT INTO users VALUES("", :name, :email, :phone, :password)');
 	  		$stmt->execute(array(
@@ -29,7 +29,7 @@ if(!function_exists('insert_event'))
 		try
 		{
 			$email_state = 0;
-			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'felix');
+			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'blombas1');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('INSERT INTO events VALUES("", :my_date, :user_id, :state)');
 	  		$stmt->execute(array(
@@ -52,7 +52,7 @@ if(!function_exists('get_users'))
 	{
 		try
 		{
-			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'felix');
+			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'blombas1');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('select name from users');
 	  		$stmt->execute();
@@ -71,7 +71,7 @@ if(!function_exists('get_user($id)'))
 	{
 		try
 		{
-			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'felix');
+			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'blombas1');
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('select * from users where id = :my_user');
 			$stmt->bindParam(':my_user', $id, PDO::PARAM_INT);
@@ -92,7 +92,7 @@ if(!function_exists('get_user_from_mail($email)'))
 	{
 		try
 		{
-			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'felix');
+			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'blombas1');
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('select * from users where email = :my_user');
 			$stmt->bindParam(':my_user', $email, PDO::PARAM_STR);
@@ -113,7 +113,7 @@ if(!function_exists('get_user_id'))
 	{
 		try
 		{
-			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'felix');
+			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'blombas1');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('select id from users where name = :name');
 	  		$stmt->bindParam(':name', $name, PDO::PARAM_STR);
@@ -135,7 +135,7 @@ if(!function_exists('get_user_event'))
 	{
 		try
 		{
-			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'felix');
+			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'blombas1');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('select datetime from events where user_id = :id order by datetime');
 	  		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -175,7 +175,7 @@ if(!function_exists('get_zero'))
 	{
 		try
 		{
-			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'felix');
+			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'blombas1');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('select user_id, datetime, id from events where email_state = 0');
 	  		$stmt->execute();
@@ -194,7 +194,7 @@ if(!function_exists('set_state($id, $state)'))
 	{
 		try
 		{
-			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'felix');
+			$conn = new PDO('mysql:mydb4.surftown.dk ;dbname=blombas_event_db', 'blombas_felix', 'blombas1');
 		  	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $conn->prepare('update events set email_state=? where id=?');
 	  		$stmt->execute(array($state, $id));
